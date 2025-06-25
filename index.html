@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Minha prancheta Magica!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="prancheta-container">
+        <!--
+        O elemento canvas é onde vamos desenhar usando JavaScript.
+        É como uma tela em branco.
+        Os atributos 'width' e 'height' definem o tamanho da área de desenho.
+        É importante definir eles aqui ou no JS, não só no CSS,
+        porque afeta as coordenadas de desenho.
+        -->
+        <canvas id="myCanvas" width="500" height="300"></canvas>
+        <!--
+        Um botão simples para limpar o conteúdo do canvas.
+        Vamos adicionar um 'id' para poder pegar ele no JavaScript.
+        -->
+        <button id="clearButton">Limpar Tudo</button>
+        <!--
+    Vamos linkar nosso arquivo JavaScript.
+    Colocamos ele no final do body para garantir que os elementos HTML
+    (canvas e botão) já existam quando o script tentar acessá-los.
+    O atributo 'defer' também ajuda nisso, dizendo para o navegador
+    esperar o HTML ser completamente carregado antes de executar o script.
+    -->
+    <script src="" defer></script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+/*
+Vamos estilizar o corpo da página e o container da prancheta.
+A ideia é que o container tenha a imagem de fundo
+e o canvas fique posicionado sobre a área branca dessa imagem.
+*/
+
+body {
+    margin: 0;
+    padding: 20px;
+    /* Adiciona um padding para não colar nas bordas */
+    background-color: #f0f0f0;
+    /* Cor de fundo padrão */
+    display: flex;
+    /* Usa flexbox para centralizar o container */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
+    min-height: 95vh;
+    /* Garante que o body ocupe quase a altura total */
+    font-family: sans-serif;
+    /* Uma fonte simples */
+}
+
+.prancheta-container {
+    /*
+    'position: relative;' é crucial aqui.
+    Ele faz com que elementos filhos com 'position: absolute;'
+    se posicionem em relação a este container, e não ao body ou à janela.
+    Isso facilita muito posicionar o canvas sobre a imagem de fundo.
+    */
+    position: relative;
+    width: 900px;
+    /* Ajuste conforme o tamanho da sua imagem de fundo */
+    height: auto;
+    /* Ajuste conforme o tamanho da sua imagem de fundo */
+    /*
+    Aqui definimos a imagem de fundo Você vai substituir 'sua-imagem-de-fundo.png' pelo nome do arquivo
+    que o aluno escolher (Imagem 3 ou Imagem 4, por exemplo).
+    */
+    background-image: url('Imgs/bg.avif');
+    background-size: 1000px 600px;
+    /* Cobre a área do container sem distorcer muito */
+    background-repeat: no-repeat;
+    /* Não repete a imagem */
+    background-position: center;
+    /* Centraliza a imagem */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Uma sombrinha pra destacar */
+    border-radius: 8px;
+    /* Cantos arredondados */
+    display: flex;
+    /* Usa flexbox para organizar o canvas e o botão dentro */
+    flex-direction: column;
+    /* Empilha os elementos verticalmente */
+    align-items: center;
+    /* Centraliza os itens (canvas e botão) horizontalmente */
+    padding-top: 50px;
+    /* Espaço no topo para a imagem de fundo aparecer */
+}
+
+#myCanvas {
+    /*
+    'position: absolute;' tira o canvas do fluxo normal do documento
+    e permite posicioná-lo exatamente onde queremos dentro do container
+    com 'position: relative;'.
+    */
+    /* position: absolute;*/
+    /* Vamos tirar o absolute por enquanto e usar flexbox do container */
+    top: 50px;
+    /* Ajuste para a posição vertical da área branca na sua imagem */
+    left: 50px;
+    /* Ajuste para a posição horizontal da área branca na sua imagem */
+    border: 1px solid #ccc;
+    /* Uma borda leve pra gente ver onde o canvas está */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Fundo branco semi-transparente */
+    margin-bottom: 20px;
+    /* Espaço entre o canvas e o botão */
+
+    /*
+    Aqui vem a sua ideia genial! Mudar o cursor quando ele estiver sobre o canvas.
+    'cursor: crosshair;' é um bom cursor para desenho.
+    'cursor: url(borracha.png), auto;' seria se você tivesse uma imagem de cursor.
+    'cursor: pointer;' é para algo clicável.
+    Vamos usar 'crosshair' ou 'pointer' por enquanto.
+    */
+    cursor: crosshair;
+    /* Ou pointer, ou até uma imagem customizada */
+}
+
+#clearButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer; /* Indica que é clicável */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease; /* Animação suave ao passar o mouse */
+}
+
+#clearButton:hover {
+    background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+}
