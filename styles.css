@@ -6,20 +6,39 @@ e o canvas fique posicionado sobre a área branca dessa imagem.
 
 body {
     margin: 0;
-    padding: 20px;
-    /* Adiciona um padding para não colar nas bordas */
-    background-color: #f0f0f0;
+    /*
+    vh (Viewport Height) é uma unidade de medida relativa à altura da janela de visualização (viewport) do navegador.
+    1vh equivale a 1% da altura da viewport.
+    padding: 15vh; significa que o padding superior e inferior será 15% da altura da tela visível.
+    */
+    padding: 15vh 20px;
+    /* Adiciona padding superior/inferior em vh e lateral em px */
+    background-color: #fdd4ae;
     /* Cor de fundo padrão */
-    display: flex;
-    /* Usa flexbox para centralizar o container */
-    justify-content: center;
-    /* Centraliza horizontalmente */
-    align-items: center;
-    /* Centraliza verticalmente */
+    display: block;
+    /* Garante comportamento de bloco normal */
     min-height: 95vh;
     /* Garante que o body ocupe quase a altura total */
-    font-family: sans-serif;
-    /* Uma fonte simples */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.main-layout-wrapper {
+    display: flex;
+    /* Organiza filhos (prancheta e botão) lado a lado */
+    align-items: flex-start;
+    /* Alinha os itens pelo topo */
+    gap: 20px;
+    /* Espaço entre a prancheta e os botões */
+    flex-wrap: wrap;
+    /* Permite que os itens quebrem para a próxima linha em telas menores */
+    justify-content: center;
+    /* Centraliza os itens DENTRO DO WRAPPER quando quebram */
+
+    /* Centraliza o wrapper horizontalmente na página e move para baixo */
+    max-width: 900px;
+    /* Define a largura máxima para centralizar */
+    margin: 20px auto;
+    /* 20px margem superior/inferior, auto para centralizar horizontalmente */
 }
 
 .prancheta-container {
@@ -30,16 +49,19 @@ body {
     Isso facilita muito posicionar o canvas sobre a imagem de fundo.
     */
     position: relative;
-    width: 900px;
-    /* Ajuste conforme o tamanho da sua imagem de fundo */
-    height: auto;
-    /* Ajuste conforme o tamanho da sua imagem de fundo */
+    width: 100%;
+    max-width: 900px;
+    /* Adiciona a propriedade aspect-ratio para manter a proporção */
+    /* Calcule a proporção: largura / altura da sua imagem de fundo */
+    /* Se a imagem é 900px de largura por 520px de altura, a proporção é 900/520 */
+    aspect-ratio: 900 / 520;
+    /* Ou 45 / 26 (versão simplificada) */
     /*
     Aqui definimos a imagem de fundo Você vai substituir 'sua-imagem-de-fundo.png' pelo nome do arquivo
     que o aluno escolher (Imagem 3 ou Imagem 4, por exemplo).
     */
     background-image: url('Imgs/bg.avif');
-    background-size: 1000px 600px;
+    background-size: contain;
     /* Cobre a área do container sem distorcer muito */
     background-repeat: no-repeat;
     /* Não repete a imagem */
@@ -48,15 +70,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* Uma sombrinha pra destacar */
     border-radius: 8px;
-    /* Cantos arredondados */
-    display: flex;
-    /* Usa flexbox para organizar o canvas e o botão dentro */
-    flex-direction: column;
-    /* Empilha os elementos verticalmente */
-    align-items: center;
-    /* Centraliza os itens (canvas e botão) horizontalmente */
-    padding-top: 50px;
-    /* Espaço no topo para a imagem de fundo aparecer */
+    overflow: hidden;
+    flex-shrink: 1;
+    /* Permite que o item encolha se necessário */
+
 }
 
 #myCanvas {
@@ -65,41 +82,91 @@ body {
     e permite posicioná-lo exatamente onde queremos dentro do container
     com 'position: relative;'.
     */
-    /* position: absolute;*/
-    /* Vamos tirar o absolute por enquanto e usar flexbox do container */
-    top: 50px;
-    /* Ajuste para a posição vertical da área branca na sua imagem */
-    left: 50px;
-    /* Ajuste para a posição horizontal da área branca na sua imagem */
+    position: absolute;
+    /* Ajuste as posições e dimensões conforme a área branca da sua imagem */
+    top: 25%;
+    left: 25.1%;
+    width: 47.7%;
+    height: 55%;
     border: 1px solid #ccc;
     /* Uma borda leve pra gente ver onde o canvas está */
     background-color: rgba(255, 255, 255, 0.8);
     /* Fundo branco semi-transparente */
-    margin-bottom: 20px;
-    /* Espaço entre o canvas e o botão */
-
-    /*
-    Aqui vem a sua ideia genial! Mudar o cursor quando ele estiver sobre o canvas.
-    'cursor: crosshair;' é um bom cursor para desenho.
-    'cursor: url(borracha.png), auto;' seria se você tivesse uma imagem de cursor.
-    'cursor: pointer;' é para algo clicável.
-    Vamos usar 'crosshair' ou 'pointer' por enquanto.
-    */
     cursor: crosshair;
     /* Ou pointer, ou até uma imagem customizada */
 }
 
 #clearButton {
-    padding: 10px 20px;
-    font-size: 16px;
+    font-size: clamp(8px, 1.8vw, 20px);
+    /* clamp(MIN, IDEAL, MAX)
+
+    MIN: O valor mínimo permitido. O valor calculado nunca será menor que este.
+         Use uma unidade absoluta (como px) ou relativa (como rem, em, vw, vh).
+         Exemplo: 16px (nunca menor que 16 pixels)
+
+    IDEAL: O valor "preferido" ou "ideal". Este é o valor que o navegador
+           tentará usar. Geralmente é uma unidade relativa (como vw ou vh)
+           que escala com a viewport, ou uma unidade relativa ao elemento pai
+           (como %). Este valor é o que torna o elemento responsivo.
+           Exemplo: 3vw (3% da largura da viewport)
+
+    MAX: O valor máximo permitido. O valor calculado nunca será maior que este.
+         Assim como o MIN, use uma unidade absoluta ou relativa.
+         Exemplo: 24px (nunca maior que 24 pixels)
+
+    Como funciona:
+    - Se o valor IDEAL for menor que MIN, clamp() usará MIN.
+    - Se o valor IDEAL for maior que MAX, clamp() usará MAX.
+    - Se o valor IDEAL estiver entre MIN e MAX, clamp() usará IDEAL.
+
+    Isso significa que o valor final será sempre:
+    max(MIN, min(IDEAL, MAX))
+    */
+
+
+    /*
+    Neste exemplo específico:
+    - O tamanho da fonte nunca será menor que 16 pixels (MIN).
+    - O tamanho da fonte ideal é 3% da largura da viewport (IDEAL).
+    - O tamanho da fonte nunca será maior que 24 pixels (MAX).
+
+    Em telas estreitas, onde 3vw seria menor que 16px, a fonte será 16px.
+    Em telas largas, onde 3vw seria maior que 24px, a fonte será 24px.
+    Em telas de tamanho médio, onde 3vw está entre 16px e 24px, a fonte será 3vw
+    e escalará suavemente com a largura da tela.
+    */
+
+    /*
+    Aplicando ao seu caso com vh:
+    Se você usou font-size: 0.6vh; e queria mínimo/máximo 1.8,
+    talvez você quisesse algo como:
+
+    font-size: clamp(1.8vh, 0.6vh, 1.8vh); -- Isso não faria sentido, pois o ideal (0.6vh)
+                                           -- é menor que o mínimo (1.8vh), então sempre seria 1.8vh.
+
+    Talvez você quisesse que o mínimo fosse 0.6vh e o máximo 1.8vh,
+    e o valor ideal fosse baseado em algo como vw ou uma mistura?
+    Exemplo: font-size: clamp(0.6vh, 2vw, 1.8vh);
+    -- Neste caso, a fonte seria no mínimo 0.6vh, no máximo 1.8vh,
+    -- e tentaria ser 2% da largura da tela quando esse valor estiver entre os limites.
+
+    Ou talvez você quisesse que o valor ideal fosse 0.6vh, mas com limites em px?
+    Exemplo: font-size: clamp(12px, 0.6vh, 20px);
+    -- Mínimo 12px, ideal 0.6vh, máximo 20px.
+    */
+    /* Usando unidades relativas (em) para padding e font-size */
+    font-weight: bold;
+    padding: 0.6em 1.2em; /* Ajuste o padding usando em */
     cursor: pointer; /* Indica que é clicável */
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
     transition: background-color 0.3s ease; /* Animação suave ao passar o mouse */
+    min-width: 0;
 }
 
 #clearButton:hover {
-    background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+    background-color: #0056b3;
+    /* Cor mais escura ao passar o mouse */
 }
