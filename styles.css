@@ -35,7 +35,7 @@ body {
     /* Centraliza os itens DENTRO DO WRAPPER quando quebram */
 
     /* Centraliza o wrapper horizontalmente na página e move para baixo */
-    max-width: 900px;
+    max-width: 1200px;
     /* Define a largura máxima para centralizar */
     margin: 20px auto;
     /* 20px margem superior/inferior, auto para centralizar horizontalmente */
@@ -50,7 +50,7 @@ body {
     */
     position: relative;
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     /* Adiciona a propriedade aspect-ratio para manter a proporção */
     /* Calcule a proporção: largura / altura da sua imagem de fundo */
     /* Se a imagem é 900px de largura por 520px de altura, a proporção é 900/520 */
@@ -84,10 +84,10 @@ body {
     */
     position: absolute;
     /* Ajuste as posições e dimensões conforme a área branca da sua imagem */
-    top: 25%;
+    top: 30%;
     left: 25.1%;
-    width: 47.7%;
-    height: 55%;
+    width: auto;
+    height: 42%;
     border: 1px solid #ccc;
     /* Uma borda leve pra gente ver onde o canvas está */
     background-color: rgba(255, 255, 255, 0.8);
