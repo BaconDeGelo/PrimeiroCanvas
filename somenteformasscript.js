@@ -54,6 +54,8 @@ ctx.fillStyle = 'green';
 
 ctx.fill();
 
+/* Losangulo */
+
 ctx.fillStyle = 'purple';
 ctx.beginPath();
 ctx.moveTo(200, 10);
@@ -62,6 +64,10 @@ ctx.lineTo(200, 50);
 ctx.lineTo(180, 30);
 ctx.closePath();
 ctx.fill();
+
+/* Losangulo */
+
+/* Estrela */
 
 ctx.fillStyle = 'gold';
 ctx.beginPath();
