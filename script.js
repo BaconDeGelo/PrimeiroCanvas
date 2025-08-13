@@ -138,7 +138,6 @@ const shapeDrawMap = {
 };
 
 
-const colors = ['red', 'blue', 'green', 'purple', 'orange', 'pink', 'cyan', 'gold', 'brown', 'lime', 'teal'];
 
 
 clearButton.addEventListener('click', function() {
