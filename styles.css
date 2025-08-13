@@ -198,3 +198,31 @@ body {
     background-color: #0056b3;
     /* Cor mais escura ao passar o mouse */
 }
+
+.colors-toolbar {
+    display: flex;
+    gap: 9px;
+    margin-top: 10px;
+    background: #fff3e0;
+    padding: 10px 9px;
+    border-radius: 7px;
+    box-shadow: 0 2px;
+    justify-content: center;
+}
+
+.color-btn {
+    width: 28px;
+    height: 28px;
+    border: 2px solid #888;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border 0.2, transform 0.2;
+    outline: none;
+    box-shadow: 0 0 2px #0002 ;
+}
+
+.color-btn.active,
+.color-btn:focus {
+    border: 3.5px solid #000;
+    transform: scale(1.2);
+}
